@@ -1,0 +1,26 @@
+{
+  "name": "sector-zero-idle",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"node --watch server/index.js\" \"vite --host 127.0.0.1\"",
+    "build": "vite build",
+    "start": "node server/index.js",
+    "test": "node --test",
+    "format": "prettier --write \"src/**/*.{js,jsx,css}\" \"server/**/*.js\" \"shared/**/*.js\" \"vite.config.js\" \"package.json\" \"README.md\" \"index.html\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,css}\" \"server/**/*.js\" \"shared/**/*.js\" \"vite.config.js\" \"package.json\" \"README.md\" \"index.html\""
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "express": "^5.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "concurrently": "^9.2.0",
+    "prettier": "^3.9.10",
+    "vite": "^6.3.5"
+  }
+}

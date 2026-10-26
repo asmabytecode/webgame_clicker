@@ -1,0 +1,18 @@
+node_modules/
+dist/
+
+# Local application data and databases
+data/
+
+# Environment variables and secrets
+.env*
+!.env.example
+
+# Logs and test/build artifacts
+*.log
+coverage/
+.vite/
+
+# OS files
+.DS_Store
+Thumbs.db
