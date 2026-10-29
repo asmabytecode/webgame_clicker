@@ -1,5 +1,3 @@
-import { soulNodes } from "../../../shared/gameData.js";
-import { SoulUpgrade } from "./UpgradeTrees.jsx";
 import { format } from "../../lib/gameMath.js";
 
 export default function RebirthPanel({ state, view, onAction }) {
@@ -45,14 +43,6 @@ export default function RebirthPanel({ state, view, onAction }) {
             ? `Возродиться · +${format(view.soulsToEarn)} SOUL`
             : "Возрождение недоступно"}
         </button>
-      </div>
-      <div className="soul-section">
-        <h3 className="soul-title">Вечные улучшения · SOUL</h3>
-        <div className="soul-tree">
-          {soulNodes.map((node) => (
-            <SoulUpgrade key={node.id} node={node} state={state} onBuy={onAction} />
-          ))}
-        </div>
       </div>
     </section>
   );

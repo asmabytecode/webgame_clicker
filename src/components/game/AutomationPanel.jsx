@@ -1,6 +1,6 @@
 import { format } from "../../lib/gameMath.js";
 
-export default function AutomationPanel({ state, view }) {
+export default function AutomationPanel({ state, view, onOpenUpgrades }) {
   return (
     <section className="panel automation-panel" aria-label="Автоматическая добыча">
       <div className="automation-heading">
@@ -45,9 +45,9 @@ export default function AutomationPanel({ state, view }) {
           <div style={{ width: `${view.syncProgress}%` }} />
         </div>
       </div>
-      <a className="automation-link" href="#upgrade-tree">
+      <button className="automation-link" type="button" onClick={onOpenUpgrades}>
         Улучшения <span aria-hidden="true">↓</span>
-      </a>
+      </button>
     </section>
   );
 }

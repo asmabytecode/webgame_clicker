@@ -1,10 +1,4 @@
-export default function GameHeader({ account, onLogout, onReset }) {
-  function resetProgress() {
-    if (window.confirm("Полностью сбросить прогресс игры этого аккаунта, включая души?")) {
-      onReset();
-    }
-  }
-
+export default function GameHeader({ account, onLogout }) {
   return (
     <header className="site-header">
       <div className="brand">
@@ -18,9 +12,6 @@ export default function GameHeader({ account, onLogout, onReset }) {
           <span className="account-avatar">{account.username.slice(0, 1).toUpperCase()}</span>
           <span>{account.username}</span>
         </div>
-        <button className="reset-button wipe-button" type="button" onClick={resetProgress}>
-          Стереть данные
-        </button>
         <button className="reset-button logout-button" type="button" onClick={onLogout}>
           Выйти
         </button>
