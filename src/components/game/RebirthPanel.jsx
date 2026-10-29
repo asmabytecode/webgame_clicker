@@ -1,5 +1,5 @@
 import { soulNodes } from "../../../shared/gameData.js";
-import { SoulUpgrade } from "../UpgradeTrees.jsx";
+import { SoulUpgrade } from "./UpgradeTrees.jsx";
 import { format } from "../../lib/gameMath.js";
 
 export default function RebirthPanel({ state, view, onAction }) {

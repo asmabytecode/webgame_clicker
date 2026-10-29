@@ -1,5 +1,5 @@
-import { dailyContracts, lifetimeMilestones } from "../../shared/gameData.js";
-import { format } from "../lib/gameMath.js";
+import { dailyContracts, lifetimeMilestones } from "../../../shared/gameData.js";
+import { format } from "../../lib/gameMath.js";
 
 export function DailyContracts({ state, onAction }) {
   const bonus = state.researchTree.researchContract || 0;

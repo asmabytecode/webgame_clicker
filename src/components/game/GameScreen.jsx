@@ -1,4 +1,4 @@
-import { DailyContracts, ExpeditionMilestones } from "../ProgressionPanels.jsx";
+import { DailyContracts, ExpeditionMilestones } from "./ProgressionPanels.jsx";
 import GameHeader from "./GameHeader.jsx";
 import GameStats from "./GameStats.jsx";
 import AutomationPanel from "./AutomationPanel.jsx";

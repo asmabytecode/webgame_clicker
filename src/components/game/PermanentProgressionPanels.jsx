@@ -1,6 +1,6 @@
 import { relicNodes, researchNodes } from "../../../shared/gameData.js";
 import { format } from "../../lib/gameMath.js";
-import { PermanentUpgrade } from "../UpgradeTrees.jsx";
+import { PermanentUpgrade } from "./UpgradeTrees.jsx";
 
 export function SectorResetPanel({ state, view, onAction }) {
   function resetSector() {

@@ -1,6 +1,6 @@
 import { branches } from "../../../shared/gameData.js";
 import { format } from "../../lib/gameMath.js";
-import { UpgradeBranch } from "../UpgradeTrees.jsx";
+import { UpgradeBranch } from "./UpgradeTrees.jsx";
 
 const orderedBranches = [
   ...branches.filter((branch) => branch.id === "auto"),

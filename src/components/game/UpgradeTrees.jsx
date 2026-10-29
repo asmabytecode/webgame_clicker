@@ -1,4 +1,4 @@
-import { getLevel, getSoulLevel, format } from "../lib/gameMath.js";
+import { getLevel, getSoulLevel, format } from "../../lib/gameMath.js";
 
 export function UpgradeBranch({ branch, state, onBuy }) {
   const upgraded = branch.nodes.reduce((sum, node) => sum + getLevel(state, node.id), 0);
