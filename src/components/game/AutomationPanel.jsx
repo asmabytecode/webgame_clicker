@@ -5,8 +5,7 @@ export default function AutomationPanel({ state, view }) {
     <section className="panel automation-panel" aria-label="Автоматическая добыча">
       <div className="automation-heading">
         <span className="eyebrow">ПРОИЗВОДСТВО · РАБОТАЕТ САМО</span>
-        <h2>Автоматизируй экспедицию</h2>
-        <p>Прокачивай дронов и ускорители — кредиты копятся каждую секунду, даже офлайн.</p>
+        <h2>Автодоход</h2>
       </div>
       <div className="automation-output">
         <strong>{format(view.automaticIncome)}</strong>
@@ -47,7 +46,7 @@ export default function AutomationPanel({ state, view }) {
         </div>
       </div>
       <a className="automation-link" href="#upgrade-tree">
-        Улучшить автопроизводство <span aria-hidden="true">↓</span>
+        Улучшения <span aria-hidden="true">↓</span>
       </a>
     </section>
   );

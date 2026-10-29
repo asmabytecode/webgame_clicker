@@ -11,10 +11,6 @@ export function DailyContracts({ state, onAction }) {
         <div>
           <span className="eyebrow">ЦИКЛ · UTC</span>
           <h2>Контракты дня</h2>
-          <p>
-            Небольшие цели на одну сессию. Обновляются каждый день, прогресс переживает сброс
-            забега.
-          </p>
         </div>
         <div className="resource-chip data-chip">DATA · {format(state.research)}</div>
       </div>
@@ -74,7 +70,6 @@ export function ExpeditionMilestones({ state, onAction }) {
         <div>
           <span className="eyebrow">КАМПАНИЯ · 7 ЭТАПОВ</span>
           <h2>Журнал экспедиции</h2>
-          <p>Долгосрочные цели по общему доходу. Прогресс сохраняется между возрождениями.</p>
         </div>
         <div className="resource-chip relic-chip">RELIC · {format(state.relics)}</div>
       </div>

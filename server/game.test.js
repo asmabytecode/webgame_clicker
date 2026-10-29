@@ -33,6 +33,50 @@ test("skill nodes enforce prerequisites and charge their price", () => {
   assert.equal(state.coins, 975);
 });
 
+test("buy max purchases every affordable level and tracks upgrades", () => {
+  const state = createGameState();
+  state.coins = 1000;
+
+  const result = applyGameAction(state, {
+    type: "buyMax",
+    purchaseType: "buyNode",
+    id: "bot",
+  });
+
+  assert.equal(result.purchases, 6);
+  assert.equal(state.tree.bot, 6);
+  assert.equal(state.coins, 80);
+  assert.equal(state.daily.progress.dailyUpgrades, 3);
+});
+
+test("buy max respects currency and rejects invalid purchase types", () => {
+  const state = createGameState();
+  state.souls = 7;
+
+  const result = applyGameAction(state, {
+    type: "buyMax",
+    purchaseType: "buySoul",
+    id: "soulClick",
+  });
+
+  assert.equal(result.purchases, 3);
+  assert.equal(state.soulTree.soulClick, 3);
+  assert.equal(state.souls, 1);
+  assert.throws(
+    () => applyGameAction(state, { type: "buyMax", purchaseType: "reset", id: "anything" }),
+    { status: 400 },
+  );
+  assert.throws(
+    () =>
+      applyGameAction(state, {
+        type: "buyMax",
+        purchaseType: "buyNode",
+        id: "missing",
+      }),
+    { status: 400 },
+  );
+});
+
 test("automatic income is calculated by the server from elapsed time", () => {
   const state = createGameState();
   state.tree.bot = 2;
@@ -195,6 +239,8 @@ test("rebirth resets a run but retains soul upgrades and lifetime earnings", () 
   state.coins = 40000;
   state.totalEarned = 40000;
   state.allTimeEarned = 50000;
+  state.totalClicks = 250;
+  state.allTimeClicks = 900;
   state.tree.bot = 8;
   state.souls = 2;
   state.soulTree.soulStart = 1;
@@ -207,12 +253,31 @@ test("rebirth resets a run but retains soul upgrades and lifetime earnings", () 
   assert.equal(state.coins, 100);
   assert.equal(state.totalEarned, 0);
   assert.equal(state.allTimeEarned, 50000);
+  assert.equal(state.totalClicks, 0);
+  assert.equal(state.allTimeClicks, 900);
   assert.equal(state.tree.bot, 0);
   assert.equal(state.selected, "classic");
   assert.deepEqual(state.unlocked, ["classic"]);
   assert.equal(state.souls, 4);
   assert.equal(state.rebirths, 1);
   assert.equal(state.soulTree.soulStart, 1);
+});
+
+test("lifetime clicks migrate from legacy saves and survive run resets", () => {
+  const legacyState = normalizeGameState({ totalClicks: 17 });
+  assert.equal(legacyState.allTimeClicks, 17);
+
+  const state = createGameState();
+  state.allTimeClicks = 12;
+  applyGameAction(state, { type: "click" });
+  assert.equal(state.allTimeClicks, 13);
+
+  state.totalEarned = 10000;
+  applyGameAction(state, { type: "rebirth" });
+  assert.equal(state.allTimeClicks, 13);
+
+  applyGameAction(state, { type: "reset" });
+  assert.equal(state.allTimeClicks, 0);
 });
 
 test("malformed stored levels are clamped to configured limits", () => {

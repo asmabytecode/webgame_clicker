@@ -7,12 +7,14 @@ import ButtonProfiles from "./ButtonProfiles.jsx";
 import RunUpgrades from "./RunUpgrades.jsx";
 import RebirthPanel from "./RebirthPanel.jsx";
 import { ResearchPanel, SectorResetPanel } from "./PermanentProgressionPanels.jsx";
+import Leaderboard from "./Leaderboard.jsx";
 
 export default function GameScreen({ account, state, view, pageError, toast, onAction, onLogout }) {
   return (
     <main className="app">
       <GameHeader account={account} onLogout={onLogout} onReset={() => onAction("reset")} />
       <GameStats state={state} view={view} />
+      <Leaderboard account={account} />
 
       {pageError && (
         <div className="page-error" role="alert">

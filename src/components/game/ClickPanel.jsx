@@ -4,8 +4,6 @@ export default function ClickPanel({ state, view, onClick }) {
   return (
     <section className="panel play-panel" aria-label="Ручной клик">
       <div className="level-pill">ЗАБЕГ · УРОВЕНЬ {view.runLevel.level}</div>
-      <h2 className="play-title">Активный бонус</h2>
-      <div className="play-subtitle">Нажимай, чтобы ускорить старт и заряжать синхронизацию.</div>
       <div className="button-stage">
         <div className="button-glow" style={{ "--button-glow": view.selectedButton.glow }} />
         <button
@@ -28,9 +26,7 @@ export default function ClickPanel({ state, view, onClick }) {
           </span>
         </button>
       </div>
-      <div className="click-hint">
-        +{format(view.manualIncome)} CR за клик · сохраняет ручной темп
-      </div>
+      <div className="click-hint">+{format(view.manualIncome)} CR / клик</div>
       <div className="progress-wrap">
         <div className="progress-label">
           <span>До уровня {view.runLevel.level + 1}</span>

@@ -19,7 +19,6 @@ export function SectorResetPanel({ state, view, onAction }) {
         <div>
           <span className="eyebrow">СБРОС II · ЭКСПЕДИЦИЯ</span>
           <h2>Смена сектора</h2>
-          <p>Крупный сброс: очищает забег, но приносит реликвии для артефактной ветки.</p>
         </div>
         <div className="resource-chip relic-chip">RELIC · {format(state.relics)}</div>
       </div>
@@ -30,10 +29,6 @@ export function SectorResetPanel({ state, view, onAction }) {
             {view.sectorRewardAmount > 0
               ? `Сейчас можно получить ${format(view.sectorRewardAmount)} реликвий за этот забег.`
               : `Прогресс: ${format(state.totalEarned)} / ${format(view.sectorThreshold)} CR.`}
-          </span>
-          <span>
-            Остаются души, исследования, купленные артефакты и долгосрочные этапы. Реликвии улучшают
-            доход, награду SOUL, запас на старте и офлайн-хранилище.
           </span>
         </div>
         <button
@@ -72,7 +67,6 @@ export function ResearchPanel({ state, onAction }) {
         <div>
           <span className="eyebrow">ПОСТОЯННОЕ РАЗВИТИЕ</span>
           <h2>Лаборатория</h2>
-          <p>Данные из ежедневных контрактов превращаются в стабильный бонус между забегами.</p>
         </div>
         <div className="resource-chip data-chip">DATA · {format(state.research)}</div>
       </div>

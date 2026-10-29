@@ -19,16 +19,11 @@ export default function RebirthPanel({ state, view, onAction }) {
         <div>
           <span className="eyebrow">СБРОС I · МЯГКИЙ ПРЕСТИЖ</span>
           <h2>Возрождение</h2>
-          <p>Сбрасывает кредиты, кнопки и дерево забега. Сохраняет исследования и реликвии.</p>
         </div>
         <div className="soul-badge">SOUL · {format(state.souls)}</div>
       </div>
       <div className="rebirth-info">
         <div className="rebirth-copy">
-          <strong>Сбросится:</strong> кредит, кнопки и навыки текущего забега.
-          <br />
-          <strong>Сохранится:</strong> души, исследования, реликвии и журнал кампании.
-          <br />
           {view.canRebirth
             ? `Расчётная награда: ${format(view.soulsToEarn)} душ · заработано ${format(state.totalEarned)} CR.`
             : `Прогресс: ${format(state.totalEarned)} / ${format(view.soulThreshold)} CR · следующая душа.`}

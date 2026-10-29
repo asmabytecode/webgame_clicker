@@ -116,6 +116,112 @@ button {
   gap: 13px;
   margin-bottom: 16px;
 }
+.leaderboard-panel {
+  margin-bottom: 16px;
+}
+.leaderboard-heading {
+  margin-bottom: 12px;
+}
+.leaderboard-heading > div {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.leaderboard-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+.leaderboard-categories button,
+.leaderboard-refresh {
+  padding: 8px 11px;
+  color: #b4c0d5;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.leaderboard-categories button:hover,
+.leaderboard-refresh:hover,
+.leaderboard-categories button.active {
+  color: #e7eaf0;
+  border-color: var(--mint);
+  background: rgba(125, 167, 189, 0.12);
+}
+.leaderboard-refresh:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.leaderboard-table-wrap {
+  overflow-x: auto;
+}
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+.leaderboard-table th {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.leaderboard-table th:first-child,
+.leaderboard-table td:first-child {
+  width: 75px;
+}
+.leaderboard-table th:last-child,
+.leaderboard-table td:last-child {
+  text-align: right;
+}
+.leaderboard-table td:last-child {
+  font-weight: 900;
+}
+.leaderboard-table td small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+}
+.leaderboard-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.leaderboard-table tr.current-player td {
+  color: #9ce8dc;
+}
+.leaderboard-you {
+  margin-left: 8px;
+  padding: 3px 6px;
+  color: #9ce8dc;
+  background: rgba(125, 167, 189, 0.12);
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 900;
+}
+.leaderboard-message,
+.leaderboard-your-rank {
+  margin: 0;
+  padding: 10px 12px;
+  color: var(--muted);
+  background: var(--panel-soft);
+  border-radius: 10px;
+  font-size: 12px;
+}
+.leaderboard-your-rank {
+  margin-top: 10px;
+}
+.leaderboard-your-rank strong {
+  color: #9ce8dc;
+}
 .stat,
 .panel {
   background: var(--panel);
@@ -1384,6 +1490,559 @@ body {
   }
 }
 
+:root {
+  color: #eef3f8;
+  background: #101720;
+  --panel: #19232f;
+  --panel-soft: #222f3d;
+  --muted: #9cabb8;
+  --line: rgba(179, 201, 218, 0.16);
+  --mint: #78d6c3;
+  --currency-cr: #f0c978;
+  --currency-soul: #c4a8f0;
+  --currency-data: #87c8e8;
+  --currency-relic: #e6a8bb;
+}
+
+body {
+  color: #eef3f8;
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(80, 148, 143, 0.14), transparent 34rem),
+    radial-gradient(ellipse at 88% 12%, rgba(134, 111, 178, 0.12), transparent 32rem), #101720;
+}
+
+.stat,
+.panel {
+  background-color: #19232f;
+  border-color: rgba(179, 201, 218, 0.15);
+}
+
+.primary-stats .auto-stat {
+  border-color: rgba(120, 214, 195, 0.34);
+  background: linear-gradient(120deg, #1d3539, #19232f 78%);
+}
+
+.primary-stats .auto-stat .stat-value,
+.automation-output strong {
+  color: #a4e5d7;
+}
+
+.main-grid .automation-panel {
+  border-color: rgba(120, 214, 195, 0.22);
+  background: linear-gradient(145deg, #1c3035, #19232f 72%);
+}
+
+.tree-branch,
+.contract-card,
+.milestone-card {
+  background: #141e28;
+  border-color: rgba(179, 201, 218, 0.13);
+}
+
+.tree-branch.auto-branch {
+  background: #19282f;
+  border-color: rgba(120, 214, 195, 0.28);
+}
+
+.skin-card,
+.tree-node,
+.soul-node {
+  background: #22303c;
+}
+
+.tree-node.purchased,
+.soul-node.purchased {
+  background: rgba(65, 133, 119, 0.2);
+  border-color: rgba(120, 214, 195, 0.24);
+}
+
+.resource-strip .currency-data,
+.resource-strip .currency-data strong,
+.resource-chip.data-chip,
+.currency-data .node-meta {
+  color: var(--currency-data);
+}
+
+.resource-strip .currency-relic,
+.resource-strip .currency-relic strong,
+.resource-chip.relic-chip,
+.currency-relic .node-meta {
+  color: var(--currency-relic);
+}
+
+.resource-strip .currency-soul,
+.resource-strip .currency-soul strong,
+.soul-badge,
+.currency-soul .node-meta {
+  color: var(--currency-soul);
+}
+
+.tree-currency,
+.currency-cr .node-meta,
+.skin-price {
+  color: var(--currency-cr);
+}
+
+.upgrade-buy-button:not(:disabled) {
+  border-color: color-mix(in srgb, var(--currency-color) 45%, transparent);
+  background: color-mix(in srgb, var(--currency-color) 7%, #22303c);
+}
+
+.upgrade-buy-button:not(:disabled):hover,
+.buy-max-button:hover:not(:disabled) {
+  border-color: var(--currency-color);
+  background: color-mix(in srgb, var(--currency-color) 16%, #22303c);
+}
+
+.rebirth-panel {
+  background: linear-gradient(125deg, #2d2940, #19232f 68%);
+}
+
+.rebirth-heading h2 {
+  color: #e2d4fb;
+}
+
+.rebirth-button {
+  color: #1d1b25;
+  background: linear-gradient(135deg, #d0b1f1, #a8b8ec);
+}
+
+.rebirth-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dfc7f7, #bdc9f3);
+}
+
+.sector-button:not(:disabled) {
+  color: #302125;
+  background: linear-gradient(135deg, #efb9c8, #e1a3b6);
+}
+
+.sector-button:not(:disabled):hover {
+  background: linear-gradient(135deg, #f5cad5, #ebb4c4);
+}
+
+.leaderboard-categories button:hover,
+.leaderboard-refresh:hover,
+.leaderboard-categories button.active {
+  border-color: rgba(120, 214, 195, 0.6);
+  background: rgba(120, 214, 195, 0.13);
+}
+
+.leaderboard-table tr.current-player td,
+.leaderboard-you,
+.leaderboard-your-rank strong {
+  color: #9ce5d2;
+}
+
+.auth-card {
+  background: linear-gradient(145deg, #1d2b37, #19232f);
+  border-color: rgba(179, 201, 218, 0.18);
+  box-shadow: 0 24px 80px rgba(4, 10, 16, 0.34);
+}
+
+.auth-kicker,
+.auth-switch button {
+  color: #9ce5d2;
+}
+
+.auth-form input {
+  color: #eef3f8;
+  background: #121c25;
+  border-color: rgba(179, 201, 218, 0.2);
+}
+
+.auth-form input:focus {
+  border-color: #78d6c3;
+  box-shadow: 0 0 0 3px rgba(120, 214, 195, 0.13);
+}
+
+.auth-submit {
+  color: #14251f;
+  background: linear-gradient(120deg, #91dfca, #a8b9ed);
+}
+
+:root {
+  color: #eef3f8;
+  background: #101720;
+  --panel: #19232f;
+  --panel-soft: #222f3d;
+  --muted: #9cabb8;
+  --line: rgba(179, 201, 218, 0.16);
+  --mint: #78d6c3;
+  --currency-cr: #f0c978;
+  --currency-soul: #c4a8f0;
+  --currency-data: #87c8e8;
+  --currency-relic: #e6a8bb;
+}
+
+body {
+  color: #eef3f8;
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(80, 148, 143, 0.14), transparent 34rem),
+    radial-gradient(ellipse at 88% 12%, rgba(134, 111, 178, 0.12), transparent 32rem), #101720;
+}
+
+.brand-icon {
+  color: #e7fbf6;
+  background: linear-gradient(145deg, #317d78, #554a79);
+}
+
+.account-chip {
+  color: #e4edf4;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.account-avatar {
+  color: #10211f;
+  background: linear-gradient(140deg, #93e2ce, #a9b5ed);
+}
+
+.stat,
+.panel {
+  background: rgba(25, 35, 47, 0.94);
+  border-color: rgba(179, 201, 218, 0.15);
+}
+
+.stat {
+  box-shadow: 0 8px 26px rgba(4, 10, 16, 0.14);
+}
+
+.primary-stats .auto-stat {
+  border-color: rgba(120, 214, 195, 0.34);
+  background: linear-gradient(120deg, #1d3539, #19232f 78%);
+}
+
+.primary-stats .auto-stat .stat-value,
+.automation-output strong {
+  color: #a4e5d7;
+}
+
+.coins,
+.tree-currency,
+.currency-cr .node-meta,
+.skin-price {
+  color: var(--currency-cr);
+}
+
+.research-value,
+.resource-chip.data-chip,
+.currency-data .node-meta {
+  color: var(--currency-data);
+}
+
+.relic-value,
+.resource-chip.relic-chip,
+.currency-relic .node-meta {
+  color: var(--currency-relic);
+}
+
+.soul-badge,
+.currency-soul .node-meta {
+  color: var(--currency-soul);
+}
+
+.main-grid .automation-panel {
+  border-color: rgba(120, 214, 195, 0.22);
+  background: linear-gradient(145deg, #1c3035, #19232f 72%);
+}
+
+.play-panel::before {
+  background: rgba(120, 214, 195, 0.12);
+}
+
+.play-panel::after {
+  background: rgba(196, 168, 240, 0.1);
+}
+
+.level-pill {
+  color: #b9eee1;
+  background: rgba(120, 214, 195, 0.12);
+  border-color: rgba(120, 214, 195, 0.22);
+}
+
+.progress-track,
+.rebirth-progress,
+.sync-meter {
+  background: #2b3945;
+}
+
+.progress-fill,
+.sync-meter > div {
+  background: linear-gradient(90deg, #69cbb5, #9fcae0);
+}
+
+.automation-multipliers > div,
+.rebirth-info {
+  border-color: rgba(179, 201, 218, 0.14);
+  background: rgba(9, 15, 22, 0.22);
+}
+
+.automation-multipliers strong,
+.sync-copy strong {
+  color: #dce9ed;
+}
+
+.tree-branch,
+.contract-card,
+.milestone-card {
+  background: #141e28;
+  border-color: rgba(179, 201, 218, 0.13);
+}
+
+.tree-branch.auto-branch {
+  background: #19282f;
+  border-color: rgba(120, 214, 195, 0.28);
+}
+
+.skin-card,
+.tree-node,
+.soul-node {
+  background: #22303c;
+}
+
+.skin-icon,
+.node-icon {
+  background: #30414d;
+  filter: none;
+}
+
+.tree-node.purchased,
+.soul-node.purchased {
+  background: rgba(65, 133, 119, 0.2);
+  border-color: rgba(120, 214, 195, 0.24);
+}
+
+.upgrade-buy-button:not(:disabled) {
+  background: color-mix(in srgb, var(--currency-color) 7%, #22303c);
+}
+
+.upgrade-buy-button:not(:disabled):hover,
+.buy-max-button:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--currency-color) 16%, #22303c);
+}
+
+.soul-node.currency-soul:not(:disabled),
+.buy-max-button.currency-soul {
+  --currency-color: var(--currency-soul);
+}
+
+.soul-node.currency-data:not(:disabled),
+.buy-max-button.currency-data {
+  --currency-color: var(--currency-data);
+}
+
+.soul-node.currency-relic:not(:disabled),
+.buy-max-button.currency-relic {
+  --currency-color: var(--currency-relic);
+}
+
+.rebirth-panel {
+  background: linear-gradient(125deg, #2d2940, #19232f 68%);
+}
+
+.rebirth-heading h2 {
+  color: #e2d4fb;
+}
+
+.rebirth-button {
+  color: #1d1b25;
+  background: linear-gradient(135deg, #d0b1f1, #a8b8ec);
+}
+
+.rebirth-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dfc7f7, #bdc9f3);
+}
+
+.sector-button:not(:disabled) {
+  color: #302125;
+  background: linear-gradient(135deg, #efb9c8, #e1a3b6);
+}
+
+.sector-button:not(:disabled):hover {
+  background: linear-gradient(135deg, #f5cad5, #ebb4c4);
+}
+
+.leaderboard-categories button:hover,
+.leaderboard-refresh:hover,
+.leaderboard-categories button.active {
+  border-color: rgba(120, 214, 195, 0.6);
+  background: rgba(120, 214, 195, 0.13);
+}
+
+.leaderboard-table tr.current-player td,
+.leaderboard-you,
+.leaderboard-your-rank strong {
+  color: #9ce5d2;
+}
+
+.leaderboard-you {
+  background: rgba(120, 214, 195, 0.13);
+}
+
+.milestone-ready,
+.contract-complete {
+  border-color: rgba(120, 214, 195, 0.35);
+}
+
+.auth-card {
+  background: linear-gradient(145deg, #1d2b37, #19232f);
+  border-color: rgba(179, 201, 218, 0.18);
+  box-shadow: 0 24px 80px rgba(4, 10, 16, 0.34);
+}
+
+.auth-kicker,
+.auth-switch button {
+  color: #9ce5d2;
+}
+
+.auth-form input {
+  color: #eef3f8;
+  background: #121c25;
+  border-color: rgba(179, 201, 218, 0.2);
+}
+
+.auth-form input:focus {
+  border-color: #78d6c3;
+  box-shadow: 0 0 0 3px rgba(120, 214, 195, 0.13);
+}
+
+.auth-submit {
+  color: #14251f;
+  background: linear-gradient(120deg, #91dfca, #a8b9ed);
+}
+
+.auth-footnote {
+  border-color: rgba(179, 201, 218, 0.14);
+}
+
+.auto-branch .tree-node.currency-cr:not(:disabled) {
+  border-color: color-mix(in srgb, var(--currency-cr) 45%, transparent);
+}
+.auto-branch .tree-node.currency-cr:not(:disabled):hover {
+  border-color: var(--currency-cr);
+}
+
+:root {
+  --currency-cr: #e9c46a;
+  --currency-soul: #c5a5ed;
+  --currency-data: #8fc8e8;
+  --currency-relic: #e4aabd;
+}
+
+.currency-cr {
+  --currency-color: var(--currency-cr);
+}
+.currency-soul {
+  --currency-color: var(--currency-soul);
+}
+.currency-data {
+  --currency-color: var(--currency-data);
+}
+.currency-relic {
+  --currency-color: var(--currency-relic);
+}
+.resource-strip .currency-data,
+.resource-chip.data-chip,
+.currency-data .node-meta {
+  color: var(--currency-data);
+}
+.resource-strip .currency-relic,
+.resource-chip.relic-chip,
+.currency-relic .node-meta {
+  color: var(--currency-relic);
+}
+.resource-strip .currency-soul,
+.soul-badge,
+.currency-soul .node-meta {
+  color: var(--currency-soul);
+}
+.tree-currency,
+.currency-cr .node-meta,
+.skin-price {
+  color: var(--currency-cr);
+}
+.currency-cr strong,
+.currency-data strong,
+.currency-relic strong,
+.currency-soul strong {
+  color: inherit;
+}
+.upgrade-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 42px;
+  align-items: stretch;
+  gap: 5px;
+}
+.upgrade-buy-button {
+  height: 100%;
+}
+.upgrade-buy-button:not(:disabled) {
+  border-color: color-mix(in srgb, var(--currency-color) 45%, transparent);
+}
+.upgrade-buy-button:not(:disabled):hover {
+  border-color: var(--currency-color);
+  background: color-mix(in srgb, var(--currency-color) 10%, #171b20);
+}
+.buy-max-button {
+  align-self: stretch;
+  padding: 6px 4px;
+  color: var(--currency-color);
+  background: color-mix(in srgb, var(--currency-color) 8%, #171b20);
+  border: 1px solid color-mix(in srgb, var(--currency-color) 38%, transparent);
+  border-radius: 9px;
+  font-size: 10px;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    background 0.18s,
+    border-color 0.18s;
+}
+.buy-max-button:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--currency-color) 18%, #171b20);
+  border-color: var(--currency-color);
+}
+.buy-max-button:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+.node-name {
+  font-size: 11px;
+}
+.node-desc {
+  font-size: 10px;
+}
+.resource-strip {
+  margin-bottom: 16px;
+}
+.section-heading h2,
+.progression-heading h2 {
+  font-size: 15px;
+}
+.contract-card {
+  min-height: 158px;
+}
+.contract-card h3 {
+  margin-bottom: 5px;
+}
+.sector-button:not(:disabled) {
+  color: #28151d;
+  background: linear-gradient(135deg, #edb6c4, #cc91a9);
+}
+.sector-button:not(:disabled):hover {
+  background: linear-gradient(135deg, #f3c4cf, #dca2b5);
+}
+
+@media (max-width: 500px) {
+  .upgrade-actions {
+    grid-template-columns: minmax(0, 1fr) 38px;
+  }
+  .progression-heading {
+    gap: 8px;
+  }
+  .resource-chip {
+    white-space: nowrap;
+  }
+}
+
 /* Put the idle engine first and keep secondary systems folded until needed. */
 .primary-stats {
   grid-template-columns: 1fr 1.35fr 1fr;
@@ -1811,4 +2470,175 @@ body {
   .auth-card {
     padding: 23px;
   }
+}
+
+/* Final theme layer keeps the palette consistent across desktop and mobile rules. */
+:root {
+  color: #eef3f8;
+  background: #101720;
+  --panel: #19232f;
+  --panel-soft: #222f3d;
+  --muted: #9cabb8;
+  --line: rgba(179, 201, 218, 0.16);
+  --mint: #78d6c3;
+  --currency-cr: #f0c978;
+  --currency-soul: #c4a8f0;
+  --currency-data: #87c8e8;
+  --currency-relic: #e6a8bb;
+}
+
+body {
+  color: #eef3f8;
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(80, 148, 143, 0.14), transparent 34rem),
+    radial-gradient(ellipse at 88% 12%, rgba(134, 111, 178, 0.12), transparent 32rem), #101720;
+}
+
+.stat,
+.panel {
+  background-color: #19232f;
+  border-color: rgba(179, 201, 218, 0.15);
+}
+
+.primary-stats .auto-stat {
+  border-color: rgba(120, 214, 195, 0.34);
+  background: linear-gradient(120deg, #1d3539, #19232f 78%);
+}
+
+.primary-stats .auto-stat .stat-value,
+.automation-output strong {
+  color: #a4e5d7;
+}
+
+.main-grid .automation-panel {
+  border-color: rgba(120, 214, 195, 0.22);
+  background: linear-gradient(145deg, #1c3035, #19232f 72%);
+}
+
+.tree-branch,
+.contract-card,
+.milestone-card {
+  background: #141e28;
+  border-color: rgba(179, 201, 218, 0.13);
+}
+
+.tree-branch.auto-branch {
+  background: #19282f;
+  border-color: rgba(120, 214, 195, 0.28);
+}
+
+.skin-card,
+.tree-node,
+.soul-node {
+  background: #22303c;
+}
+
+.tree-node.purchased,
+.soul-node.purchased {
+  background: rgba(65, 133, 119, 0.2);
+  border-color: rgba(120, 214, 195, 0.24);
+}
+
+.resource-strip .currency-data,
+.resource-strip .currency-data strong,
+.resource-chip.data-chip,
+.currency-data .node-meta {
+  color: var(--currency-data);
+}
+
+.resource-strip .currency-relic,
+.resource-strip .currency-relic strong,
+.resource-chip.relic-chip,
+.currency-relic .node-meta {
+  color: var(--currency-relic);
+}
+
+.resource-strip .currency-soul,
+.resource-strip .currency-soul strong,
+.soul-badge,
+.currency-soul .node-meta {
+  color: var(--currency-soul);
+}
+
+.tree-currency,
+.currency-cr .node-meta,
+.skin-price {
+  color: var(--currency-cr);
+}
+
+.upgrade-buy-button:not(:disabled) {
+  border-color: color-mix(in srgb, var(--currency-color) 45%, transparent);
+  background: color-mix(in srgb, var(--currency-color) 7%, #22303c);
+}
+
+.upgrade-buy-button:not(:disabled):hover,
+.buy-max-button:hover:not(:disabled) {
+  border-color: var(--currency-color);
+  background: color-mix(in srgb, var(--currency-color) 16%, #22303c);
+}
+
+.rebirth-panel {
+  background: linear-gradient(125deg, #2d2940, #19232f 68%);
+}
+
+.rebirth-heading h2 {
+  color: #e2d4fb;
+}
+
+.rebirth-button {
+  color: #1d1b25;
+  background: linear-gradient(135deg, #d0b1f1, #a8b8ec);
+}
+
+.rebirth-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dfc7f7, #bdc9f3);
+}
+
+.sector-button:not(:disabled) {
+  color: #302125;
+  background: linear-gradient(135deg, #efb9c8, #e1a3b6);
+}
+
+.sector-button:not(:disabled):hover {
+  background: linear-gradient(135deg, #f5cad5, #ebb4c4);
+}
+
+.leaderboard-categories button:hover,
+.leaderboard-refresh:hover,
+.leaderboard-categories button.active {
+  border-color: rgba(120, 214, 195, 0.6);
+  background: rgba(120, 214, 195, 0.13);
+}
+
+.leaderboard-table tr.current-player td,
+.leaderboard-you,
+.leaderboard-your-rank strong {
+  color: #9ce5d2;
+}
+
+.auth-card {
+  background: linear-gradient(145deg, #1d2b37, #19232f);
+  border-color: rgba(179, 201, 218, 0.18);
+  box-shadow: 0 24px 80px rgba(4, 10, 16, 0.34);
+}
+
+.auth-kicker,
+.auth-switch button {
+  color: #9ce5d2;
+}
+
+.auth-form input {
+  color: #eef3f8;
+  background: #121c25;
+  border-color: rgba(179, 201, 218, 0.2);
+}
+
+.auth-form input:focus {
+  border-color: #78d6c3;
+  box-shadow: 0 0 0 3px rgba(120, 214, 195, 0.13);
+}
+
+.auth-submit {
+  color: #14251f;
+  background: linear-gradient(120deg, #91dfca, #a8b9ed);
 }

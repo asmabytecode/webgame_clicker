@@ -43,6 +43,7 @@ function resetRun(state, now = Date.now()) {
     daily: state.daily,
     legacyMultiplier: state.legacyMultiplier,
     allTimeEarned: state.allTimeEarned,
+    allTimeClicks: state.allTimeClicks,
     coins: soulLevel(state, "soulStart") * 100 + (state.relicTree.relicStart || 0) * 500,
     lastTickAt: now,
   });
@@ -75,6 +76,7 @@ export function applyGameAction(state, action) {
       if (lucky) reward *= 3;
       earn(state, reward);
       state.totalClicks++;
+      state.allTimeClicks++;
       trackDaily(state, "dailyClicks", 1);
       return { state, reward, critical, lucky };
     }
@@ -113,6 +115,24 @@ export function applyGameAction(state, action) {
     case "buyRelic": {
       const node = buyUpgrade(state, relicNodes, "relicTree", action.id, "relics");
       return { state, node };
+    }
+    case "buyMax": {
+      const purchaseTypes = ["buyNode", "buySoul", "buyResearch", "buyRelic"];
+      if (!purchaseTypes.includes(action.purchaseType)) {
+        throw Object.assign(new Error("Тип улучшения не найден"), { status: 400 });
+      }
+
+      let purchases = 0;
+      while (purchases < 100) {
+        try {
+          applyGameAction(state, { type: action.purchaseType, id: action.id });
+          purchases++;
+        } catch (error) {
+          if (purchases > 0 && error.status === 409) break;
+          throw error;
+        }
+      }
+      return { state, purchases };
     }
     case "claimContract": {
       const contract = nodeById(dailyContracts, action.id);

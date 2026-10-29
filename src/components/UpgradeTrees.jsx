@@ -11,9 +11,7 @@ export function UpgradeBranch({ branch, state, onBuy }) {
       <summary className="branch-title">
         <span>{branch.icon}</span>
         <span className="branch-label">{branch.title}</span>
-        <span className="branch-status">
-          {branch.id === "auto" ? "Основной путь" : `${upgraded} ур.`}
-        </span>
+        <span className="branch-status">{upgraded} ур.</span>
       </summary>
       <div className="branch-content">
         <div className="branch-nodes">
@@ -27,14 +25,14 @@ export function UpgradeBranch({ branch, state, onBuy }) {
               : "";
 
             return (
-              <div className="tree-step" key={node.id}>
+              <div className="tree-step upgrade-actions" key={node.id}>
                 {index > 0 && (
                   <div className="branch-arrow" aria-hidden="true">
                     ↓
                   </div>
                 )}
                 <button
-                  className={`tree-node ${level ? "purchased" : ""} ${available ? "available" : ""}`}
+                  className={`tree-node upgrade-buy-button currency-cr ${level ? "purchased" : ""}`}
                   type="button"
                   disabled={!available}
                   title={!unlocked ? prerequisite : undefined}
@@ -55,6 +53,16 @@ export function UpgradeBranch({ branch, state, onBuy }) {
                     </small>
                   </span>
                 </button>
+                <button
+                  className="buy-max-button currency-cr"
+                  type="button"
+                  disabled={!available || level >= node.max}
+                  aria-label={`Купить максимум: ${node.name}`}
+                  title="Купить до максимального уровня"
+                  onClick={() => onBuy("buyMax", node.id, { purchaseType: "buyNode" })}
+                >
+                  MAX
+                </button>
               </div>
             );
           })}
@@ -65,25 +73,39 @@ export function UpgradeBranch({ branch, state, onBuy }) {
 }
 
 function UpgradeCard({ node, level, cost, currency, available, onBuy, action }) {
+  const currencyClass = currency.toLowerCase();
+
   return (
-    <button
-      className={`soul-node permanent-node ${level ? "purchased" : ""} ${available ? "available" : ""}`}
-      type="button"
-      disabled={!available}
-      onClick={() => onBuy(action, node.id)}
-    >
-      <span className="node-icon">{node.icon}</span>
-      <span className="node-copy">
-        <span className="node-name">{node.name}</span>
-        <span className="node-desc">{node.description}</span>
-      </span>
-      <span className="node-meta">
-        {level >= node.max ? "МАКС" : `${format(cost)} ${currency}`}
-        <small>
-          {level}/{node.max}
-        </small>
-      </span>
-    </button>
+    <div className="upgrade-actions">
+      <button
+        className={`soul-node permanent-node currency-${currencyClass} ${level ? "purchased" : ""}`}
+        type="button"
+        disabled={!available}
+        onClick={() => onBuy(action, node.id)}
+      >
+        <span className="node-icon">{node.icon}</span>
+        <span className="node-copy">
+          <span className="node-name">{node.name}</span>
+          <span className="node-desc">{node.description}</span>
+        </span>
+        <span className="node-meta">
+          {level >= node.max ? "МАКС" : `${format(cost)} ${currency}`}
+          <small>
+            {level}/{node.max}
+          </small>
+        </span>
+      </button>
+      <button
+        className={`buy-max-button currency-${currencyClass}`}
+        type="button"
+        disabled={!available || level >= node.max}
+        aria-label={`Купить максимум: ${node.name}`}
+        title="Купить до максимального уровня"
+        onClick={() => onBuy("buyMax", node.id, { purchaseType: action })}
+      >
+        MAX
+      </button>
+    </div>
   );
 }
 

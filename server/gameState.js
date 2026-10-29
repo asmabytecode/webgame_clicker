@@ -21,6 +21,7 @@ export function createGameState(now = Date.now()) {
     totalEarned: 0,
     allTimeEarned: 0,
     totalClicks: 0,
+    allTimeClicks: 0,
     selected: "classic",
     unlocked: ["classic"],
     tree: Object.fromEntries(runNodes.map((node) => [node.id, 0])),
@@ -79,6 +80,7 @@ export function normalizeGameState(input, now = Date.now()) {
     "totalEarned",
     "allTimeEarned",
     "totalClicks",
+    "allTimeClicks",
     "souls",
     "rebirths",
     "research",
@@ -87,6 +89,8 @@ export function normalizeGameState(input, now = Date.now()) {
   ]) {
     state[key] = Number.isFinite(state[key]) && state[key] >= 0 ? state[key] : 0;
   }
+  if (input?.allTimeClicks === undefined) state.allTimeClicks = state.totalClicks;
+  if (state.allTimeClicks < state.totalClicks) state.allTimeClicks = state.totalClicks;
   state.unlocked = Array.isArray(state.unlocked)
     ? [...new Set(state.unlocked.filter((id) => buttonTypes.some((button) => button.id === id)))]
     : ["classic"];

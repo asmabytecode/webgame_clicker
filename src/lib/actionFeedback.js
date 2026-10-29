@@ -19,6 +19,7 @@ export function getActionFeedback(type, result) {
 
   if (["buyNode", "buySoul", "buyResearch", "buyRelic"].includes(type))
     return "Улучшение приобретено";
+  if (type === "buyMax") return `Покупок: ${result.purchases}`;
   if (type === "chooseSkin") return "Профиль кнопки изменён";
   return "";
 }

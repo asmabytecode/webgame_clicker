@@ -81,14 +81,14 @@ export function useGameSession() {
   );
 
   const performAction = useCallback(
-    async (type, id) => {
+    async (type, id, extra = {}) => {
       const number = ++requestNumber.current;
       pendingActions.current++;
 
       try {
         const result = await api("/api/game/action", {
           method: "POST",
-          body: JSON.stringify({ type, id }),
+          body: JSON.stringify({ type, id, ...extra }),
         });
         if (number >= appliedNumber.current) {
           appliedNumber.current = number;

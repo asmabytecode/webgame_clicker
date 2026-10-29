@@ -27,13 +27,13 @@ export default function GameStats({ state, view }) {
         </div>
       </section>
       <div className="resource-strip" aria-label="Постоянные ресурсы">
-        <span>
+        <span className="currency-data">
           DATA <strong>{format(state.research)}</strong>
         </span>
-        <span>
+        <span className="currency-relic">
           RELIC <strong>{format(state.relics)}</strong>
         </span>
-        <span>
+        <span className="currency-soul">
           SOUL <strong>{format(state.souls)}</strong>
         </span>
         <span>

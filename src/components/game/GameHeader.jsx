@@ -11,7 +11,6 @@ export default function GameHeader({ account, onLogout, onReset }) {
         <div className="brand-icon brand-mark">S0</div>
         <div>
           <h1>СЕКТОР НОЛЬ</h1>
-          <p>Idle-экспедиция</p>
         </div>
       </div>
       <div className="header-actions">

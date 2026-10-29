@@ -7,7 +7,6 @@ export default function ButtonProfiles({ state, view, onSelect }) {
       <summary className="profile-summary">
         <span>
           <strong>Профили кнопки</strong>
-          <small>Выбор меняет силу ручного клика</small>
         </span>
         <span className="profile-current">
           {view.selectedButton.name} · {format(view.manualIncome)} CR/клик
@@ -39,9 +38,6 @@ export default function ButtonProfiles({ state, view, onSelect }) {
             );
           })}
         </div>
-        <p className="profile-note">
-          Купленные профили сохраняются до престижа; более мощная кнопка ускоряет ручной доход.
-        </p>
       </div>
     </details>
   );
