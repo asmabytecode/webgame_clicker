@@ -23,7 +23,14 @@ function configureMiddleware(app) {
 }
 
 function configureApiRoutes(app) {
-  app.get("/api/health", (request, response) => response.json({ status: "ok" }));
+  app.get("/api/health", (request, response) =>
+    response.json({
+      status: "ok",
+      service: "sector-zero-api",
+      uptimeSeconds: Math.floor(process.uptime()),
+      checkedAt: new Date().toISOString(),
+    }),
+  );
   app.use("/api/auth", authRoutes);
   app.use("/api/game", gameRoutes);
 }
